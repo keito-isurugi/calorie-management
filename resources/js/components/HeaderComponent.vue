@@ -4,10 +4,12 @@
             <nav class="navbar navbar-dark">
                 <span class="navbar-brand mb-0 h1">Calorie Management</span>
                 <div>
-                    <router-link v-bind:to="{name: 'index'}">
+                    <router-link v-bind:to="{name: 'food.list'}">
                         <button class="btn btn-success">List</button>
                     </router-link>
-                    <button class="btn btn-success">ADD</button>
+                    <router-link v-bind:to="{name: 'food.create'}">
+                        <button class="btn btn-success">Add</button>
+                    </router-link>
                 </div>
             </nav>
         </div>

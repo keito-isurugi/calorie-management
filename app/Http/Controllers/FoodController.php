@@ -15,6 +15,7 @@ class FoodController extends Controller
 
     public function store(Request $request)
     {
+        echo "hoge";
         return Food::create($request->all());
     }
 
@@ -29,7 +30,7 @@ class FoodController extends Controller
         return $food;
     }
 
-    public function destory(Food $food)
+    public function destroy(Food $food)
     {
         $food->delete();
         return $food;

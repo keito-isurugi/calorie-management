@@ -37,7 +37,7 @@
                     <!-- </router-link> -->
                 </td>
                 <td>
-                    <button class="btn btn-danger" v-on:click="deletefood(food.id)">Delete</button>
+<button class="btn btn-danger" v-on:click="deletefood(food.id)">Delete</button>
                 </td>
             </tr>
             </tbody>
@@ -116,6 +116,12 @@ export default {
         },
         isCurrent(page) {
             return page === this.current_page;
+        },
+        async deletefood(id) {
+            await axios.delete('/api/foods/' + id)
+                .then((res) => {
+                    this.getfoods();
+                });
         }
     },
     computed: {
