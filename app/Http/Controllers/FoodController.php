@@ -9,7 +9,8 @@ class FoodController extends Controller
 {
     public function index()
     {
-        return Food::all();
+        $food =  Food::paginate(15);
+        return $food;
     }
 
     public function store(Request $request)

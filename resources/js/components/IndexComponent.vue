@@ -3,7 +3,7 @@
         <table class="table table-hover">
             <thead class="thead-light">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">No.</th>
                 <th scope="col">Middle Category</th>
                 <th scope="col">Name</th>
                 <th scope="col">Amount</th>
@@ -42,6 +42,40 @@
             </tr>
             </tbody>
         </table>
+        <div>
+            <ul class="pagination">
+                <li
+                    class="inactive"
+                    :class="(current_page == 1) ? 'disabled' : ''"
+                    @click="changePage(current_page-1)"
+                >«</li>
+                <li 
+                    v-for="page in frontPageRange" 
+                    :key="page" 
+                    @click="changePage(page)"
+                    :class="(isCurrent(page)) ? 'active' : 'inactive'"
+                    >{{ page }}</li>
+                <li v-show="front_dot" class="inactive disabled">...</li>
+                <li 
+                    v-for="page in middlePageRange" 
+                    :key="page" 
+                    @click="changePage(page)"
+                    :class="(isCurrent(page)) ? 'active' : 'inactive'"
+                    >{{ page }}</li>
+                <li v-show="end_dot" class="inactive disabled">...</li>
+                <li 
+                    v-for="page in endPageRange" 
+                    :key="page" 
+                    @click="changePage(page)"
+                    :class="(isCurrent(page)) ? 'active' : 'inactive'"
+                    >{{ page }}</li>
+                <li
+                    class="inactive"
+                    :class="(current_page >= last_page) ? 'disabled' : ''"
+                    @click="changePage(current_page+1)"
+                >»</li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -49,19 +83,98 @@
 export default {
     data: function () {
         return {
-            foods: []
+            foods: [],
+            current_page:1,
+            last_page: "",
+            range: 5,
+            front_dot: false,
+            end_dot: false,
         }
     },
     methods: {
-        getfoods() {
-            axios.get('/api/foods')
+        async getfoods() {
+            await axios.get(`/api/foods?page=${this.current_page}`)
                 .then((res) => {
-                    this.foods = res.data;
+                    this.current_page = res.data.current_page;
+                    this.last_page = res.data.last_page;
+                    this.foods = res.data.data;
+                    console.log(res);
                 });
+        },
+        calRange(start,end) {
+            const range = [];
+            for (let i = start; i <= end; i++) {
+                range.push(i);
+            }
+            return range;
+        },
+        changePage(page) {
+            if (page > 0 && page <= this.last_page) {
+                this.current_page = page;
+                this.getfoods();
+            }
+        },
+        isCurrent(page) {
+            return page === this.current_page;
         }
     },
-    mounted() {
+    computed: {
+        frontPageRange() {
+        return this.calRange(1, 2);
+        },
+        middlePageRange() {
+        let start = "";
+        let end = "";
+        if (this.current_page <= this.range) {
+            start = 3;
+            end = this.range + 2;
+            this.front_dot = false;
+            this.end_dot = true;
+        } else if (this.current_page > this.last_page - this.range) {
+            start = this.last_page - this.range - 1;
+            end = this.last_page - 2;
+            this.front_dot = true;
+            this.end_dot = false;
+        } else {
+            start = this.current_page - Math.floor(this.range / 2);
+            end = this.current_page + Math.floor(this.range / 2);
+            this.front_dot = true;
+            this.end_dot = true;
+        }
+        return this.calRange(start, end);
+        },
+        endPageRange() {
+        return this.calRange(this.last_page - 1, this.last_page);
+        }
+    },
+    created() {
         this.getfoods();
     }
 }
 </script>
+
+<style scoped>
+.pagination {
+    display: flex;
+    list-style-type: none;
+}
+.pagination li {
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    text-align: center;
+    cursor: pointer;
+}
+.pagination li + li {
+    border-left: none;
+}
+.active {
+    background-color: rgb(89, 153, 250);
+    color:white;
+    }
+.inactive{
+    color: rgb(89, 153, 250);
+}
+.disabled {
+    cursor: not-allowed;
+}
+</style>
