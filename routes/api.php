@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/foods', [FoodController::class, 'index']);
+Route::post('/foods',[FoodController::class, 'store']);
+Route::get('/foods/{food}', [FoodController::class, 'show']);
+Route::put('/foods/{food}', [FoodController::class, 'update']);
+Route::delete('/foods/{food}', [FoodController::class, 'destroy']);
