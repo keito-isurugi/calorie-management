@@ -15,7 +15,6 @@ class FoodController extends Controller
 
     public function store(Request $request)
     {
-        echo "hoge";
         return Food::create($request->all());
     }
 

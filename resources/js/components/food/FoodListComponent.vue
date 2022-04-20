@@ -27,14 +27,14 @@
                 <td>{{ food.fat }}g</td>
                 <td>{{ food.carbohydrate }}g</td>
                 <td>
-                  <!-- <router-link v-bind:to="{name: 'food.show', params: {foodId: food.id }}"> -->
-                    <button class="btn btn-primary">Show</button>
-                  <!-- </router-link> -->
+                    <router-link v-bind:to="{name: 'food.show', params: {foodId: food.id }}">
+                        <button class="btn btn-primary">Show</button>
+                    </router-link>
                 </td>
                 <td>
-                    <!-- <router-link v-bind:to="{name: 'food.edit', params: {foodId: food.id }}"> -->
+                    <router-link v-bind:to="{name: 'food.edit', params: {foodId: food.id }}">
                         <button class="btn btn-success">Edit</button>
-                    <!-- </router-link> -->
+                    </router-link>
                 </td>
                 <td>
 <button class="btn btn-danger" v-on:click="deletefood(food.id)">Delete</button>
