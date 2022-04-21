@@ -15,8 +15,12 @@ use App\Http\Controllers\FoodController;
 |
 */
 
+// foods
 Route::get('/foods', [FoodController::class, 'index']);
+Route::get('/foods/search',[FoodController::class, 'search']);
 Route::post('/foods',[FoodController::class, 'store']);
+Route::get('/foods/get_major_category', [FoodController::class, 'getMajorCategory']);
+Route::get('/foods/get_middle_category', [FoodController::class, 'getMiddleCategory']);
 Route::get('/foods/{food}', [FoodController::class, 'show']);
 Route::put('/foods/{food}', [FoodController::class, 'update']);
 Route::delete('/foods/{food}', [FoodController::class, 'destroy']);

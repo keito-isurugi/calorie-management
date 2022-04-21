@@ -5,11 +5,17 @@
         <form v-on:submit.prevent="submit">
           <div class="form-group row">
             <label for="major_category" class="col-sm-3 col-form-label">Major Category</label>
-            <input type="text" class="col-sm-9 form-control" id="major_category" v-model="food.major_category">
+            <select class="col-sm-9 form-select" id="major_category" v-model="food.major_category">
+              <option disabled value="initial">選択してください</option>
+              <option v-for="majorCategory in majorCategorys" :key="majorCategory" v-bind:value="majorCategory.major_category">{{majorCategory.major_category}}</option>
+            </select>
           </div>
           <div class="form-group row">
             <label for="middle_category" class="col-sm-3 col-form-label">Middle Category</label>
-            <input type="text" class="col-sm-9 form-control" id="middle_category" v-model="food.middle_category">
+            <select class="col-sm-9 form-select" id="middle_category" v-model="food.middle_category">
+              <option disabled value="initial">選択してください</option>
+              <option v-for="middleCategory in middleCategorys" :key="middleCategory"  v-bind:value="middleCategory.middle_category">{{middleCategory.middle_category}}</option>
+            </select>
           </div>
           <div class="form-group row">
             <label for="name" class="col-sm-3 col-form-label">Name</label>
@@ -46,7 +52,14 @@
   export default {
     data: function() {
       return {
-        food: {}
+        food: {
+          major_category: 'initial',
+          middle_category: 'initial',
+        },
+        selected_major: 'initial',
+        selected_middle: 'initial',
+        majorCategorys: [],
+        middleCategorys: [],
       }
     },
     methods: {
@@ -58,7 +71,23 @@
           .catch(error => {
             console.log(error)
           })
-      }
+      },
+      getMajorCategory(){
+        axios.get('/api/foods/get_major_category')
+          .then((res) => {
+            this.majorCategorys = res.data;
+          })
+      },
+      getMiddleCategory(){
+        axios.get('/api/foods/get_middle_category')
+          .then((res) => {
+            this.middleCategorys = res.data;
+          })
+      },
     },
+    mounted(){
+      this.getMajorCategory(); 
+      this.getMiddleCategory(); 
+    }
   }
 </script>
