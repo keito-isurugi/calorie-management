@@ -18,6 +18,7 @@ use App\Http\Controllers\FoodController;
 // foods
 Route::get('/foods', [FoodController::class, 'index']);
 Route::get('/foods/search',[FoodController::class, 'search']);
+Route::get('/foods/sort',[FoodController::class, 'sort']);
 Route::post('/foods',[FoodController::class, 'store']);
 Route::get('/foods/get_major_category', [FoodController::class, 'getMajorCategory']);
 Route::get('/foods/get_middle_category', [FoodController::class, 'getMiddleCategory']);

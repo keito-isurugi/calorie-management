@@ -21,6 +21,7 @@
                             <!-- <select class="col-sm-9 form-select" id="middle_category" v-model="searchMiddleCategory" @change="getFoodsSearch()"> -->
                             <select class="col-sm-9 form-select" id="middle_category" v-model="searchMiddleCategory">
                                 <option disabled value="initial">選択してください</option>
+                                <option value="">全て</option>
                                 <option v-for="middleCategory in middleCategorys" :key="middleCategory"  v-bind:value="middleCategory.middle_category">{{middleCategory.middle_category}}</option>
                             </select>
                         </div>
@@ -28,19 +29,20 @@
                 </div>
             </div>
         </div>
-        <h1>{{message}}</h1>
-        <h1>{{sort_key}}</h1>
+        <h1>{{sortColumn}}</h1>
+        <h1>{{orderby}}</h1>
+        <h1>{{orderbyKey}}</h1>
         <table class="table table-hover">
             <thead class="thead-light">
             <tr>
                 <th scope="col">No.</th>
                 <th scope="col">Middle Category</th>
                 <th scope="col">Name</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Calorie</th>
-                <th scope="col">Protein</th>
-                <th scope="col">Fat</th>
-                <th scope="col">Carbohydrate</th>
+                <th scope="col" @click="getFoodsSort('amount')">Amount</th>
+                <th scope="col" @click="getFoodsSort('calorie')">Calorie</th>
+                <th scope="col" @click="getFoodsSort('protein')">Protein</th>
+                <th scope="col" @click="getFoodsSort('fat')">Fat</th>
+                <th scope="col" @click="getFoodsSort('carbohydrate')">Carbohydrate</th>
                 <th scope="col">Show</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
@@ -123,6 +125,9 @@ export default {
             middleCategorys: [],
             searchMiddleCategory: '',
             searchName: '',
+            sortColumn: '',
+            orderby: false,
+            orderbyKey: '',
         }
     },
     methods: {
@@ -144,7 +149,7 @@ export default {
         changePage(page) {
             if (page > 0 && page <= this.last_page) {
                 this.current_page = page;
-                if(!this.searchMiddleCategory){
+                if(!this.searchMiddleCategory && !this.searchName){
                     this.getfoods();
                 } else {
                     this.getFoodsSearch();
@@ -182,9 +187,34 @@ export default {
                     this.foods = res.data.data;
             })
         },
-        sortBy(key) {
-            this.sort_key = key;
-        }
+        getFoodsSort(column){
+            console.log(this.searchMiddleCategory);
+            axios.get(`/api/foods/sort?page=${this.current_page}`, 
+            {params: {
+                middle_category: this.searchMiddleCategory,
+                name: this.searchName,
+                sort_column: column,
+                orderby: this.orderby,
+                orderby_key: this.orderbyKey,
+                }})
+                .then((res) => {
+                    console.log(res.data);
+                    this.current_page = res.data.current_page;
+                    this.last_page = res.data.last_page;
+                    this.foods = res.data.data;
+                    this.orderby = !this.orderby;
+                    this.sortColumn = "hoge";
+            })
+        },
+        // hoge(column) {
+        //     this.sortColumn = column;
+        //     this.orderby = !this.orderby;
+        //     if (this.orderby) {
+        //         this.orderbyKey = 'asc';
+        //     } else {
+        //         this.orderbyKey = 'desc';
+        //     }
+        // }
     },
     computed: {
         frontPageRange() {

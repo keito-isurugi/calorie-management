@@ -62,4 +62,24 @@ class FoodController extends Controller
         return $food;
     }
 
+    public function sort(Request $request)
+    {
+        $foodsQuery = Food::query();
+        if(isset($request->middle_category)){
+            $foodsQuery = $foodsQuery->whereMiddle_category($request->middle_category);
+        }
+        if(isset($request->name)){
+            $foodsQuery = $foodsQuery->where('name', 'like', "%$request->name%");
+        }
+        if($request->orderby == "true") {
+            $foodsQuery = $foodsQuery->orderBy($request->sort_column, 'asc')->paginate(15);
+        }
+        if($request->orderby == "false") {
+            $foodsQuery = $foodsQuery->orderBy($request->sort_column, 'desc')->paginate(15);
+        }
+        
+        $food =  $foodsQuery;
+        return $food;
+    }
+
 }
