@@ -50,7 +50,15 @@ class FoodController extends Controller
 
     public function search(Request $request)
     {   
-        $food =  Food::where('middle_category', '=', $request->item_name)->paginate(15);
+        $foodsQuery = Food::query();
+        if(isset($request->middle_category)){
+            $foodsQuery = $foodsQuery->whereMiddle_category($request->middle_category);
+        }
+        if(isset($request->name)){
+            $foodsQuery = $foodsQuery->where('name', 'like', "%$request->name%");
+        }
+        $foodsQuery = $foodsQuery->paginate(15);
+        $food =  $foodsQuery;
         return $food;
     }
 

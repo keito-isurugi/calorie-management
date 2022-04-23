@@ -5,20 +5,21 @@
             <div class="row">
                 <div class="col-sm">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">商品名</label>
+                        <label class="col-sm-2 col-form-label">Name</label>
                         <!--入力-->
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="searchWord" value="">
+                            <input type="text" class="form-control" name="searchWord" v-model="searchName">
                         </div>
                         <div class="col-sm-auto">
-                            <button type="submit" class="btn btn-primary ">検索</button>
+                            <button type="submit" class="btn btn-primary" v-on:click="getFoodsSearch()">検索</button>
                         </div>
                     </div>     
                     <!--プルダウンカテゴリ選択-->
                     <div class="form-group row">
-                        <label class="col-sm-2">商品カテゴリ</label>
+                        <label class="col-sm-2">Middle Category</label>
                         <div class="col-sm-3">
-                            <select class="col-sm-9 form-select" id="middle_category" v-model="searchMiddleCategory" @change="getFoodsSearch()">
+                            <!-- <select class="col-sm-9 form-select" id="middle_category" v-model="searchMiddleCategory" @change="getFoodsSearch()"> -->
+                            <select class="col-sm-9 form-select" id="middle_category" v-model="searchMiddleCategory">
                                 <option disabled value="initial">選択してください</option>
                                 <option v-for="middleCategory in middleCategorys" :key="middleCategory"  v-bind:value="middleCategory.middle_category">{{middleCategory.middle_category}}</option>
                             </select>
@@ -27,6 +28,8 @@
                 </div>
             </div>
         </div>
+        <h1>{{message}}</h1>
+        <h1>{{sort_key}}</h1>
         <table class="table table-hover">
             <thead class="thead-light">
             <tr>
@@ -119,6 +122,7 @@ export default {
             majorCategorys: [],
             middleCategorys: [],
             searchMiddleCategory: '',
+            searchName: '',
         }
     },
     methods: {
@@ -170,7 +174,7 @@ export default {
         },
         getFoodsSearch(){
             console.log(this.searchMiddleCategory);
-            axios.get(`/api/foods/search?page=${this.current_page}`, {params: {item_name:this.searchMiddleCategory}})
+            axios.get(`/api/foods/search?page=${this.current_page}`, {params: {middle_category:this.searchMiddleCategory, name:this.searchName}})
                 .then((res) => {
                     console.log(res.data);
                     this.current_page = res.data.current_page;
@@ -178,6 +182,9 @@ export default {
                     this.foods = res.data.data;
             })
         },
+        sortBy(key) {
+            this.sort_key = key;
+        }
     },
     computed: {
         frontPageRange() {
