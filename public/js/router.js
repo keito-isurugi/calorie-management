@@ -19697,7 +19697,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       sortColumn: '',
       orderby: false,
       orderbyKey: '',
-      hoge: ''
+      items: [{
+        name: 'りんご',
+        price: '100'
+      }, {
+        name: 'みかん',
+        price: '50'
+      }, {
+        name: 'マンゴー',
+        price: '3000'
+      }]
     };
   },
   methods: {
@@ -19831,6 +19840,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this6.last_page = res.data.last_page;
         _this6.foods = res.data.data;
         _this6.orderby = !_this6.orderby;
+      });
+    },
+    getFoodsCsv: function getFoodsCsv() {
+      window.confirm('全ての食品データをCSVでダウンロードしますがよろしいでしょうか？');
+      var csv = "\uFEFF" + 'No, 大分類, 中分類, 食品名, 量(g), カロリー(kcal), タンパク質(g), 脂質(g), 炭水化物(g)\n';
+      axios.get('/api/foods/csv').then(function (res) {
+        console.log(res.data);
+        res.data.forEach(function (el) {
+          var line = el.id + ',' + el.major_category + ',' + el.middle_category + ',' + el.name + ',' + el.amount + ',' + el.calorie + ',' + el.protein + ',' + el.fat + ',' + el.carbohydrate + '\n';
+          csv += line;
+        });
+        var blob = new Blob([csv], {
+          type: 'text/csv'
+        });
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'foods_data.csv';
+        link.click();
       });
     }
   },
@@ -20566,7 +20593,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.getFoodsSearch();
     })
-  }, "検索")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("プルダウンカテゴリ選択"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <select class=\"col-sm-9 form-select\" id=\"middle_category\" v-model=\"searchMiddleCategory\" @change=\"getFoodsSearch()\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  }, "検索")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("プルダウンカテゴリ選択"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     "class": "col-sm-9 form-select",
     id: "middle_category",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
@@ -20583,35 +20610,34 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.searchMiddleCategory]])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.sortColumn), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.orderby), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.orderbyKey), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_17, _hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
-    scope: "col",
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.searchMiddleCategory]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn btn-success",
     onClick: _cache[3] || (_cache[3] = function ($event) {
+      return $options.getFoodsCsv();
+    })
+  }, "CSV_DL")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_17, _hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+    scope: "col",
+    onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.getFoodsSort('amount');
     })
   }, "Amount"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col",
-    onClick: _cache[4] || (_cache[4] = function ($event) {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.getFoodsSort('calorie');
     })
   }, "Calorie"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col",
-    onClick: _cache[5] || (_cache[5] = function ($event) {
+    onClick: _cache[6] || (_cache[6] = function ($event) {
       return $options.getFoodsSort('protein');
     })
   }, "Protein"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col",
-    onClick: _cache[6] || (_cache[6] = function ($event) {
+    onClick: _cache[7] || (_cache[7] = function ($event) {
       return $options.getFoodsSort('fat');
     })
   }, "Fat"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col",
-    onClick: _cache[7] || (_cache[7] = function ($event) {
+    onClick: _cache[8] || (_cache[8] = function ($event) {
       return $options.getFoodsSort('carbohydrate');
     })
   }, "Carbohydrate"), _hoisted_20, _hoisted_21, _hoisted_22])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.foods, function (food) {
@@ -20677,7 +20703,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["inactive", _ctx.current_page == 1 ? 'disabled' : '']),
-    onClick: _cache[8] || (_cache[8] = function ($event) {
+    onClick: _cache[9] || (_cache[9] = function ($event) {
       return $options.changePage(_ctx.current_page - 1);
     })
   }, "«", 2
@@ -20724,7 +20750,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["inactive", _ctx.current_page >= _ctx.last_page ? 'disabled' : '']),
-    onClick: _cache[9] || (_cache[9] = function ($event) {
+    onClick: _cache[10] || (_cache[10] = function ($event) {
       return $options.changePage(_ctx.current_page + 1);
     })
   }, "»", 2

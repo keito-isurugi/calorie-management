@@ -10,9 +10,6 @@
                     <router-link v-bind:to="{name: 'food.create'}">
                         <button class="btn btn-success">Add</button>
                     </router-link>
-                    <!-- <router-link v-bind:to="{name: 'food.create'}"> -->
-                        <button class="btn btn-success">CSV_DL</button>
-                    <!-- </router-link> -->
                 </div>
             </nav>
         </div>

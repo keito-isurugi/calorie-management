@@ -18,7 +18,6 @@
                     <div class="form-group row">
                         <label class="col-sm-2">Middle Category</label>
                         <div class="col-sm-3">
-                            <!-- <select class="col-sm-9 form-select" id="middle_category" v-model="searchMiddleCategory" @change="getFoodsSearch()"> -->
                             <select class="col-sm-9 form-select" id="middle_category" v-model="searchMiddleCategory">
                                 <option disabled value="initial">選択してください</option>
                                 <option value="">全て</option>
@@ -26,12 +25,10 @@
                             </select>
                         </div>
                     </div>
+                <button class="btn btn-success" @click="getFoodsCsv()">CSV_DL</button>
                 </div>
             </div>
         </div>
-        <h1>{{sortColumn}}</h1>
-        <h1>{{orderby}}</h1>
-        <h1>{{orderbyKey}}</h1>
         <table class="table table-hover">
             <thead class="thead-light">
             <tr>
@@ -128,7 +125,11 @@ export default {
             sortColumn: '',
             orderby: false,
             orderbyKey: '',
-            hoge: '',
+            items: [
+                { name: 'りんご', price: '100' },
+                { name: 'みかん', price: '50' },
+                { name: 'マンゴー', price: '3000' }
+            ]
         }
     },
     methods: {
@@ -218,6 +219,33 @@ export default {
                     this.last_page = res.data.last_page;
                     this.foods = res.data.data;
                     this.orderby = !this.orderby;
+            })
+        },
+        getFoodsCsv(){
+            window.confirm('全ての食品データをCSVでダウンロードしますがよろしいでしょうか？');
+            var csv = '\ufeff' + 'No, 大分類, 中分類, 食品名, 量(g), カロリー(kcal), タンパク質(g), 脂質(g), 炭水化物(g)\n'
+            axios.get('/api/foods/csv')
+                .then((res) => {
+                    console.log(res.data);
+                    res.data.forEach(el => {
+                        var line = 
+                        el.id + 
+                        ',' + el.major_category + 
+                        ',' + el.middle_category + 
+                        ',' + el.name + 
+                        ',' + el.amount + 
+                        ',' + el.calorie + 
+                        ',' + el.protein + 
+                        ',' + el.fat + 
+                        ',' + el.carbohydrate + 
+                        '\n'
+                        csv += line
+                    })
+                    let blob = new Blob([csv], { type: 'text/csv' })
+                    let link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = 'foods_data.csv'
+                    link.click()
             })
         },
     },

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Food;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
 
 class FoodController extends Controller
 {
@@ -82,4 +84,9 @@ class FoodController extends Controller
         return $food;
     }
 
+    public function csvDownload()
+    {
+        $food =  Food::all();
+        return $food;
+    }
 }
