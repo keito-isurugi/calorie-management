@@ -128,10 +128,12 @@ export default {
             sortColumn: '',
             orderby: false,
             orderbyKey: '',
+            hoge: '',
         }
     },
     methods: {
         async getfoods() {
+            localStorage.removeItem('Key');
             await axios.get(`/api/foods?page=${this.current_page}`)
                 .then((res) => {
                     this.current_page = res.data.current_page;
@@ -178,6 +180,7 @@ export default {
             })
         },
         getFoodsSearch(){
+            localStorage.removeItem('Key');
             console.log(this.searchMiddleCategory);
             axios.get(`/api/foods/search?page=${this.current_page}`, {params: {middle_category:this.searchMiddleCategory, name:this.searchName}})
                 .then((res) => {
@@ -188,7 +191,19 @@ export default {
             })
         },
         getFoodsSort(column){
-            console.log(this.searchMiddleCategory);
+            if(JSON.parse(localStorage.getItem('Key'))){
+                var jsonObj = localStorage.getItem('Key');
+                var jsObj = JSON.parse(jsonObj);
+                if(column == jsObj.sort){
+                } else {
+                    this.orderby = true;
+                }
+            }
+            var obj = {
+                sort: column,
+            }
+            var obj = JSON.stringify(obj);
+            localStorage.setItem('Key', obj);
             axios.get(`/api/foods/sort?page=${this.current_page}`, 
             {params: {
                 middle_category: this.searchMiddleCategory,
@@ -203,18 +218,8 @@ export default {
                     this.last_page = res.data.last_page;
                     this.foods = res.data.data;
                     this.orderby = !this.orderby;
-                    this.sortColumn = "hoge";
             })
         },
-        // hoge(column) {
-        //     this.sortColumn = column;
-        //     this.orderby = !this.orderby;
-        //     if (this.orderby) {
-        //         this.orderbyKey = 'asc';
-        //     } else {
-        //         this.orderbyKey = 'desc';
-        //     }
-        // }
     },
     computed: {
         frontPageRange() {

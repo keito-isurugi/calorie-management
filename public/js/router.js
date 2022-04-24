@@ -19696,7 +19696,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       searchName: '',
       sortColumn: '',
       orderby: false,
-      orderbyKey: ''
+      orderbyKey: '',
+      hoge: ''
     };
   },
   methods: {
@@ -19708,14 +19709,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                localStorage.removeItem('Key');
+                _context.next = 3;
                 return axios.get("/api/foods?page=".concat(_this.current_page)).then(function (res) {
                   _this.current_page = res.data.current_page;
                   _this.last_page = res.data.last_page;
                   _this.foods = res.data.data;
                 });
 
-              case 2:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -19784,6 +19786,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getFoodsSearch: function getFoodsSearch() {
       var _this5 = this;
 
+      localStorage.removeItem('Key');
       console.log(this.searchMiddleCategory);
       axios.get("/api/foods/search?page=".concat(this.current_page), {
         params: {
@@ -19800,7 +19803,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getFoodsSort: function getFoodsSort(column) {
       var _this6 = this;
 
-      console.log(this.searchMiddleCategory);
+      if (JSON.parse(localStorage.getItem('Key'))) {
+        var jsonObj = localStorage.getItem('Key');
+        var jsObj = JSON.parse(jsonObj);
+
+        if (column == jsObj.sort) {} else {
+          this.orderby = true;
+        }
+      }
+
+      var obj = {
+        sort: column
+      };
+      var obj = JSON.stringify(obj);
+      localStorage.setItem('Key', obj);
       axios.get("/api/foods/sort?page=".concat(this.current_page), {
         params: {
           middle_category: this.searchMiddleCategory,
@@ -19815,18 +19831,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this6.last_page = res.data.last_page;
         _this6.foods = res.data.data;
         _this6.orderby = !_this6.orderby;
-        _this6.sortColumn = "hoge";
       });
-    } // hoge(column) {
-    //     this.sortColumn = column;
-    //     this.orderby = !this.orderby;
-    //     if (this.orderby) {
-    //         this.orderbyKey = 'asc';
-    //     } else {
-    //         this.orderbyKey = 'desc';
-    //     }
-    // }
-
+    }
   },
   computed: {
     frontPageRange: function frontPageRange() {
