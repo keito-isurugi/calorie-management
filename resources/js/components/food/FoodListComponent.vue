@@ -5,24 +5,24 @@
             <div class="row">
                 <div class="col-sm">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Name</label>
+                        <label class="col-sm-2 col-form-label">食品名</label>
                         <!--入力-->
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="searchWord" v-model="searchName">
                         </div>
-                        <div class="col-sm-auto">
-                            <button type="submit" class="btn btn-primary" v-on:click="getFoodsSearch()">検索</button>
-                        </div>
                     </div>     
                     <!--プルダウンカテゴリ選択-->
                     <div class="form-group row">
-                        <label class="col-sm-2">Middle Category</label>
+                        <label class="col-sm-2">カテゴリー</label>
                         <div class="col-sm-3">
                             <select class="col-sm-9 form-select" id="middle_category" v-model="searchMiddleCategory">
                                 <option disabled value="initial">選択してください</option>
                                 <option value="">全て</option>
                                 <option v-for="middleCategory in middleCategorys" :key="middleCategory"  v-bind:value="middleCategory.middle_category">{{middleCategory.middle_category}}</option>
                             </select>
+                        <div class="col-sm-auto">
+                            <button type="submit" class="btn btn-primary" v-on:click="getFoodsSearch()">検索</button>
+                        </div>
                         </div>
                     </div>
                 <button class="btn btn-success" @click="getFoodsCsv()">CSV_DL</button>
@@ -33,16 +33,16 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col">No.</th>
-                <th scope="col">Middle Category</th>
-                <th scope="col">Name</th>
-                <th scope="col" @click="getFoodsSort('amount')">Amount</th>
-                <th scope="col" @click="getFoodsSort('calorie')">Calorie</th>
-                <th scope="col" @click="getFoodsSort('protein')">Protein</th>
-                <th scope="col" @click="getFoodsSort('fat')">Fat</th>
-                <th scope="col" @click="getFoodsSort('carbohydrate')">Carbohydrate</th>
-                <th scope="col">Show</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
+                <th scope="col">カテゴリー</th>
+                <th scope="col">食品名</th>
+                <th scope="col" @click="getFoodsSort('amount')">量(g)</th>
+                <th scope="col" @click="getFoodsSort('calorie')">カロリー(kcal)</th>
+                <th scope="col" @click="getFoodsSort('protein')">タンパク質(g)</th>
+                <th scope="col" @click="getFoodsSort('fat')">脂質(g)</th>
+                <th scope="col" @click="getFoodsSort('carbohydrate')">炭水化物(g)</th>
+                <th scope="col">詳細</th>
+                <th scope="col">編集</th>
+                <th scope="col">削除</th>
             </tr>
             </thead>
             <tbody>
@@ -57,16 +57,16 @@
                 <td>{{ food.carbohydrate }}g</td>
                 <td>
                     <router-link v-bind:to="{name: 'food.show', params: {foodId: food.id }}">
-                        <button class="btn btn-primary">Show</button>
+                        <button class="btn btn-primary">詳細</button>
                     </router-link>
                 </td>
                 <td>
                     <router-link v-bind:to="{name: 'food.edit', params: {foodId: food.id }}">
-                        <button class="btn btn-success">Edit</button>
+                        <button class="btn btn-success">編集</button>
                     </router-link>
                 </td>
                 <td>
-                    <button class="btn btn-danger" v-on:click="deletefood(food.id)">Delete</button>
+                    <button class="btn btn-danger" v-on:click="deletefood(food.id)">削除</button>
                 </td>
             </tr>
             </tbody>

@@ -23733,7 +23733,7 @@ var _hoisted_5 = {
 var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "col-sm-2 col-form-label"
-  }, "Name", -1
+  }, "食品名", -1
   /* HOISTED */
   );
 });
@@ -23742,25 +23742,22 @@ var _hoisted_7 = {
   "class": "col-sm-5"
 };
 var _hoisted_8 = {
-  "class": "col-sm-auto"
-};
-var _hoisted_9 = {
   "class": "form-group row"
 };
 
-var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "col-sm-2"
-  }, "Middle Category", -1
+  }, "カテゴリー", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_11 = {
+var _hoisted_10 = {
   "class": "col-sm-3"
 };
 
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     disabled: "",
     value: "initial"
@@ -23769,7 +23766,7 @@ var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: ""
   }, "全て", -1
@@ -23777,7 +23774,10 @@ var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_14 = ["value"];
+var _hoisted_13 = ["value"];
+var _hoisted_14 = {
+  "class": "col-sm-auto"
+};
 var _hoisted_15 = {
   "class": "table table-hover"
 };
@@ -23796,7 +23796,7 @@ var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col"
-  }, "Middle Category", -1
+  }, "カテゴリー", -1
   /* HOISTED */
   );
 });
@@ -23804,7 +23804,7 @@ var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col"
-  }, "Name", -1
+  }, "食品名", -1
   /* HOISTED */
   );
 });
@@ -23812,7 +23812,7 @@ var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col"
-  }, "Show", -1
+  }, "詳細", -1
   /* HOISTED */
   );
 });
@@ -23820,7 +23820,7 @@ var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col"
-  }, "Edit", -1
+  }, "編集", -1
   /* HOISTED */
   );
 });
@@ -23828,7 +23828,7 @@ var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col"
-  }, "Delete", -1
+  }, "削除", -1
   /* HOISTED */
   );
 });
@@ -23840,7 +23840,7 @@ var _hoisted_23 = {
 var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary"
-  }, "Show", -1
+  }, "詳細", -1
   /* HOISTED */
   );
 });
@@ -23848,7 +23848,7 @@ var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-success"
-  }, "Edit", -1
+  }, "編集", -1
   /* HOISTED */
   );
 });
@@ -23878,30 +23878,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.searchName]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    type: "submit",
-    "class": "btn btn-primary",
-    onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $options.getFoodsSearch();
-    })
-  }, "検索")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("プルダウンカテゴリ選択"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.searchName]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("プルダウンカテゴリ選択"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     "class": "col-sm-9 form-select",
     id: "middle_category",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return _ctx.searchMiddleCategory = $event;
     })
-  }, [_hoisted_12, _hoisted_13, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.middleCategorys, function (middleCategory) {
+  }, [_hoisted_11, _hoisted_12, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.middleCategorys, function (middleCategory) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
       key: middleCategory,
       value: middleCategory.middle_category
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(middleCategory.middle_category), 9
     /* TEXT, PROPS */
-    , _hoisted_14);
+    , _hoisted_13);
   }), 128
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.searchMiddleCategory]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.searchMiddleCategory]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "submit",
+    "class": "btn btn-primary",
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $options.getFoodsSearch();
+    })
+  }, "検索")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-success",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.getFoodsCsv();
@@ -23911,27 +23911,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.getFoodsSort('amount');
     })
-  }, "Amount"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  }, "量(g)"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col",
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.getFoodsSort('calorie');
     })
-  }, "Calorie"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  }, "カロリー(kcal)"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col",
     onClick: _cache[6] || (_cache[6] = function ($event) {
       return $options.getFoodsSort('protein');
     })
-  }, "Protein"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  }, "タンパク質(g)"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col",
     onClick: _cache[7] || (_cache[7] = function ($event) {
       return $options.getFoodsSort('fat');
     })
-  }, "Fat"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  }, "脂質(g)"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col",
     onClick: _cache[8] || (_cache[8] = function ($event) {
       return $options.getFoodsSort('carbohydrate');
     })
-  }, "Carbohydrate"), _hoisted_20, _hoisted_21, _hoisted_22])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.foods, function (food) {
+  }, "炭水化物(g)"), _hoisted_20, _hoisted_21, _hoisted_22])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.foods, function (food) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: food.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(food.id), 1
@@ -23987,7 +23987,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.deletefood(food.id);
       }
-    }, "Delete", 8
+    }, "削除", 8
     /* PROPS */
     , _hoisted_26)])]);
   }), 128
