@@ -3,6 +3,7 @@ import FoodListComponent from "./components/food/FoodListComponent";
 import FoodCreateComponent from "./components/food/FoodCreateComponent";
 import FoodShowComponent from "./components/food/FoodShowComponent";
 import FoodEditComponent from "./components/food/FoodEditComponent";
+import UserRegisterComponent from "./components/user/UserRegisterComponent";
 
 const routes = [
   { 
@@ -26,6 +27,11 @@ const routes = [
     name: 'food.edit',
     component: FoodEditComponent,
     props: true
+  },
+  { 
+    path: '/user/register', 
+    name: 'user.register',
+    component: UserRegisterComponent,
   },
 ]
 
